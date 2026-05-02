@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Founder Dashboard | Pulse Digest</title>
+  <link rel="stylesheet" href="founders-dashboard.css" />
+</head>
+
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">P</div>
+      <div>
+        <h1>Pulse Digest</h1>
+        <p>Founder portal</p>
+      </div>
+    </div>
+
+    <nav class="menu">
+      <button class="menu-item active" data-tab="send-request">Send Request</button>
+      <button class="menu-item" data-tab="kpi-forms">KPI Forms</button>
+      <button class="menu-item" data-tab="urgent-request">Urgent Request</button>
+      <button class="menu-item" data-tab="todo-list">To-do List</button>
+      <button class="menu-item" data-tab="view-meetings">View Meetings</button>
+      <button class="menu-item" data-tab="request-meeting">Request Meeting</button>
+      <button class="menu-item" data-tab="pitch-deck">Pitch Deck</button>
+    </nav>
+
+    <a href="index.html" class="logout-link">← Back to Home</a>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Founder Dashboard</p>
+        <h2 id="pageTitle">Send Request</h2>
+      </div>
+
+      <div class="profile-pill">
+        <span class="status-dot"></span>
+        Founder Account
+      </div>
+    </header>
+
+    <section class="tab-content active" id="send-request">
+      <div class="section-card">
+        <div class="section-heading">
+          <h3>Send approval request</h3>
+          <p>Submit approval requests to management by writing a message and attaching a PDF, if required.</p>
+        </div>
+
+        <form id="sendRequestForm" class="form-grid">
+          <div class="form-group">
+            <label for="requestTitle">Request title</label>
+            <input type="text" id="requestTitle" placeholder="Example: Budget approval for marketing campaign"
+              required />
+          </div>
+
+          <div class="form-group">
+            <label for="requestType">Request type</label>
+            <select id="requestType" required>
+              <option value="">Select request type</option>
+              <option>Budget approval</option>
+              <option>Partnership approval</option>
+              <option>Procurement approval</option>
+              <option>Hiring approval</option>
+              <option>Event approval</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="requestMessage">Request details</label>
+            <textarea id="requestMessage" rows="7"
+              placeholder="Write the details of the request, justification and expected outcome..." required></textarea>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="requestPdf">Upload supporting PDF</label>
+            <input type="file" id="requestPdf" accept="application/pdf" />
+          </div>
+
+          <button type="submit" class="primary-btn">Send Request</button>
+          <p class="form-message" id="sendRequestMessage"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="tab-content" id="kpi-forms">
+      <div class="section-card">
+        <div class="section-heading">
+          <h3>Select KPIs</h3>
+          <p>Select the KPIs to report. The form will be built only for the selected indicators.</p>
+        </div>
+
+        <div class="kpi-grid" id="kpiGrid">
+          <label class="kpi-card">
+            <input type="checkbox" value="Revenue" data-frequency="Monthly" />
+            <span>Revenue</span>
+            <small>Monthly</small>
+          </label>
+
+          <label class="kpi-card">
+            <input type="checkbox" value="Funding Raised" data-frequency="Monthly" />
+            <span>Funding Raised</span>
+            <small>Monthly</small>
+          </label>
+
+          <label class="kpi-card">
+            <input type="checkbox" value="POC Assigned vs Converted" data-frequency="Monthly" />
+            <span>POC Assigned vs Converted</span>
+            <small>Monthly</small>
+          </label>
+
+          <label class="kpi-card">
+            <input type="checkbox" value="Headcount" data-frequency="Monthly" />
+            <span>Headcount</span>
+            <small>Monthly</small>
+          </label>
+
+          <label class="kpi-card">
+            <input type="checkbox" value="Runway" data-frequency="Monthly" />
+            <span>Runway</span>
+            <small>Monthly</small>
+          </label>
+
+          <label class="kpi-card">
+            <input type="checkbox" value="Product Milestones" data-frequency="Weekly" />
+            <span>Product Milestones</span>
+            <small>Weekly</small>
+          </label>
+
+          <label class="kpi-card">
+            <input type="checkbox" value="IP Filing" data-frequency="Monthly" />
+            <span>IP Filing</span>
+            <small>Monthly</small>
+          </label>
+
+          <label class="kpi-card">
+            <input type="checkbox" value="Partnerships" data-frequency="Monthly" />
+            <span>Partnerships</span>
+            <small>Monthly</small>
+          </label>
+
+          <label class="kpi-card">
+            <input type="checkbox" value="Subsidy Update" data-frequency="Monthly" />
+            <span>Subsidy Update</span>
+            <small>Monthly</small>
+          </label>
+
+          <label class="kpi-card">
+            <input type="checkbox" value="Jobs Created" data-frequency="Monthly" />
+            <span>Jobs Created</span>
+            <small>Monthly</small>
+          </label>
+
+          <label class="kpi-card">
+            <input type="checkbox" value="Mentorship Hours" data-frequency="Weekly" />
+            <span>Mentorship Hours</span>
+            <small>Weekly</small>
+          </label>
+
+          <label class="kpi-card">
+            <input type="checkbox" value="Exits" data-frequency="Monthly" />
+            <span>Exits</span>
+            <small>Monthly</small>
+          </label>
+
+          <label class="kpi-card other-card">
+            <input type="checkbox" value="Other" data-frequency="Custom" id="otherKpiCheck" />
+            <span>Other KPI</span>
+            <small>Custom</small>
+          </label>
+        </div>
+
+        <div class="form-group other-kpi-box" id="otherKpiBox">
+          <label for="otherKpiInput">Add other KPI</label>
+          <input type="text" id="otherKpiInput" placeholder="Enter another KPI name" />
+        </div>
+
+        <div class="action-row">
+          <button class="primary-btn" id="buildFormBtn">Build Form</button>
+          <p class="form-message" id="kpiSelectMessage"></p>
+        </div>
+      </div>
+
+      <div class="section-card hidden" id="kpiFormSection">
+        <div class="section-heading">
+          <h3>Complete KPI report</h3>
+          <p>Enter details for the selected KPIs and submit the report to management.</p>
+        </div>
+
+        <form id="dynamicKpiForm" class="dynamic-form"></form>
+      </div>
+
+      <div class="section-card hidden" id="kpiDashboard">
+        <div class="section-heading">
+          <h3>KPI dashboard preview</h3>
+          <p>The submitted KPI report is now visible here and ready for management review.</p>
+        </div>
+
+        <div class="dashboard-grid" id="kpiDashboardGrid"></div>
+      </div>
+    </section>
+
+    <section class="tab-content" id="urgent-request">
+      <div class="section-card urgent-card">
+        <div class="section-heading">
+          <h3>Send urgent request</h3>
+          <p>Use this section only for time-sensitive requests that require immediate management attention.</p>
+        </div>
+
+        <form id="urgentRequestForm" class="form-grid">
+          <div class="form-group">
+            <label for="urgentSubject">Subject</label>
+            <input type="text" id="urgentSubject" placeholder="Example: Urgent approval required" required />
+          </div>
+
+          <div class="form-group">
+            <label for="urgencyLevel">Urgency level</label>
+            <select id="urgencyLevel" required>
+              <option value="">Select urgency level</option>
+              <option>High</option>
+              <option>Critical</option>
+              <option>Immediate action required</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="urgentMessage">Urgent request details</label>
+            <textarea id="urgentMessage" rows="8" placeholder="Write the urgent request here..." required></textarea>
+          </div>
+
+          <button type="submit" class="danger-btn">Send Urgent Request</button>
+          <p class="form-message" id="urgentRequestMessage"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="tab-content" id="todo-list">
+      <div class="section-card">
+        <div class="section-heading">
+          <h3>To-do list from management</h3>
+          <p>Track and complete tasks assigned by the management team.</p>
+        </div>
+
+        <div class="todo-input">
+          <input type="text" id="newTodoInput" placeholder="Demo only: add a task received from management" />
+          <button class="primary-btn" id="addTodoBtn">Add</button>
+        </div>
+
+        <div class="todo-list" id="todoList"></div>
+      </div>
+    </section>
+
+    <section class="tab-content" id="view-meetings">
+      <div class="section-card">
+        <div class="section-heading">
+          <h3>View meetings</h3>
+          <p>Review scheduled meetings and respond to meeting requests from management.</p>
+        </div>
+
+        <div class="meeting-list" id="meetingList"></div>
+      </div>
+    </section>
+
+    <section class="tab-content" id="request-meeting">
+      <div class="section-card">
+        <div class="section-heading">
+          <h3>Request meeting</h3>
+          <p>Request a meeting with management and provide the preferred date, time, meeting contact and agenda.</p>
+        </div>
+
+        <form id="requestMeetingForm" class="form-grid">
+          <div class="form-group">
+            <label for="meetingTitle">Meeting title</label>
+            <input type="text" id="meetingTitle" placeholder="Example: Monthly performance review" required />
+          </div>
+
+          <div class="form-group">
+            <label for="meetingContact">Meeting with</label>
+            <select id="meetingContact" required>
+              <option value="">Select contact</option>
+              <option>Product Manager</option>
+              <option>Investment Manager</option>
+              <option>Incubation Manager</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="meetingDate">Preferred date</label>
+            <input type="date" id="meetingDate" required />
+          </div>
+
+          <div class="form-group">
+            <label for="meetingTime">Preferred time</label>
+            <input type="time" id="meetingTime" required />
+          </div>
+
+          <div class="form-group">
+            <label for="meetingMode">Meeting mode</label>
+            <select id="meetingMode" required>
+              <option value="">Select meeting mode</option>
+              <option>Online</option>
+              <option>In person</option>
+              <option>Hybrid</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="meetingAgenda">Agenda</label>
+            <textarea id="meetingAgenda" rows="6" placeholder="Write the meeting agenda..." required></textarea>
+          </div>
+
+          <button type="submit" class="primary-btn">Request Meeting</button>
+          <p class="form-message" id="requestMeetingMessage"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="tab-content" id="pitch-deck">
+      <div class="section-card">
+        <div class="section-heading">
+          <h3>Pitch deck</h3>
+          <p>Upload and manage the latest pitch deck for management review.</p>
+        </div>
+
+        <form id="pitchDeckForm" class="form-grid">
+          <div class="form-group">
+            <label for="deckTitle">Deck title</label>
+            <input type="text" id="deckTitle" placeholder="Example: Q3 Investor Pitch Deck" required />
+          </div>
+
+          <div class="form-group">
+            <label for="deckVersion">Version</label>
+            <input type="text" id="deckVersion" placeholder="Example: v1.2" required />
+          </div>
+
+          <div class="form-group full-width">
+            <label for="deckFile">Upload pitch deck</label>
+            <input type="file" id="deckFile" accept="application/pdf,.ppt,.pptx" required />
+          </div>
+
+          <div class="form-group full-width">
+            <label for="deckNotes">Notes for management</label>
+            <textarea id="deckNotes" rows="5" placeholder="Add any notes, changes or review instructions..."></textarea>
+          </div>
+
+          <button type="submit" class="primary-btn">Submit Pitch Deck</button>
+          <p class="form-message" id="pitchDeckMessage"></p>
+        </form>
+
+        <div class="submitted-decks" id="submittedDecks"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="founders-dashboard.js"></script>
+</body>
+
+</html>

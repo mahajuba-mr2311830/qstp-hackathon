@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pulse Digest</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">Pulse Digest</div>
+
+    <div class="signin-wrapper">
+      <button class="signin-btn" id="signinBtn">
+        Sign in
+        <span>▾</span>
+      </button>
+
+      <div class="signin-menu" id="signinMenu">
+        <a href="founder-login.html">Founder Profile</a>
+        <a href="management-login.html">Management Profile</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">AI-powered company intelligence</p>
+      <h1>Pulse Digest</h1>
+      <p class="hero-text">
+        Automatically pull, organise and display portfolio companies’ latest social media updates in one clean dashboard.
+      </p>
+    </section>
+
+    <section class="digest-section">
+      <div class="section-header">
+        <div>
+          <h2>Live Social Pulse</h2>
+          <p>Recent company updates pulled from LinkedIn, Instagram, Facebook and other public channels.</p>
+        </div>
+
+        <div class="scroll-controls">
+          <button id="scrollLeft" aria-label="Scroll left">←</button>
+          <button id="scrollRight" aria-label="Scroll right">→</button>
+        </div>
+      </div>
+
+      <div class="post-carousel" id="postCarousel">
+        <article class="post-card">
+          <div class="platform-badge linkedin">in</div>
+          <div class="post-meta">
+            <span class="category">Digital Education</span>
+            <span>LinkedIn</span>
+          </div>
+          <h3>Today we achieved a new milestone in digital learning.</h3>
+          <p>
+            Our latest platform update helped improve learner engagement and completion tracking across partner schools.
+          </p>
+          <div class="post-image">Image preview</div>
+        </article>
+
+        <article class="post-card">
+          <div class="platform-badge instagram">◎</div>
+          <div class="post-meta">
+            <span class="category">WaterTech</span>
+            <span>Instagram</span>
+          </div>
+          <h3>Today we completed field testing for our smart water-monitoring unit.</h3>
+          <p>
+            The system now provides faster leakage detection and better consumption visibility for utility partners.
+          </p>
+          <div class="post-image">Image preview</div>
+        </article>
+
+        <article class="post-card">
+          <div class="platform-badge facebook">f</div>
+          <div class="post-meta">
+            <span class="category">SpeakLoudly</span>
+            <span>Facebook</span>
+          </div>
+          <h3>It is a pleasure to announce our new communication-accessibility programme.</h3>
+          <p>
+            The initiative supports inclusive communication tools for students, educators and community organisations.
+          </p>
+          <div class="post-image">Image preview</div>
+        </article>
+
+        <article class="post-card">
+          <div class="platform-badge linkedin">in</div>
+          <div class="post-meta">
+            <span class="category">HealthAI</span>
+            <span>LinkedIn</span>
+          </div>
+          <h3>Our AI screening dashboard is now being piloted with clinical partners.</h3>
+          <p>
+            The pilot focuses on faster reporting, improved workflow visibility and better early-stage decision support.
+          </p>
+          <div class="post-image">Image preview</div>
+        </article>
+
+        <article class="post-card">
+          <div class="platform-badge instagram">◎</div>
+          <div class="post-meta">
+            <span class="category">GreenBuild</span>
+            <span>Instagram</span>
+          </div>
+          <h3>We showcased our low-carbon construction material prototype.</h3>
+          <p>
+            The product aims to reduce material waste while supporting more sustainable building practices.
+          </p>
+          <div class="post-image">Image preview</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="info-section">
+      <div class="info-card">
+        <h3>Auto Pull</h3>
+        <p>AI collects public posts from connected company social channels.</p>
+      </div>
+
+      <div class="info-card">
+        <h3>Digest</h3>
+        <p>Updates are summarised into a clean, readable dashboard format.</p>
+      </div>
+
+      <div class="info-card">
+        <h3>Monitor</h3>
+        <p>Management can quickly track activity, momentum and visibility.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

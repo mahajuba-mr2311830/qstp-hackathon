@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Management Dashboard | Pulse Digest</title>
+    <link rel="stylesheet" href="management-dashboard.css" />
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">M</div>
+            <div>
+                <h1>Pulse Digest</h1>
+                <p>Management portal</p>
+            </div>
+        </div>
+
+        <nav class="menu">
+            <button class="menu-item active" data-tab="main-dashboard">Main Dashboard</button>
+            <button class="menu-item" data-tab="select-startups">Select Startups</button>
+        </nav>
+
+        <a href="index.html" class="logout-link">← Back to Home</a>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">QSTP Portfolio Management</p>
+                <h2 id="pageTitle">Main Dashboard</h2>
+            </div>
+
+            <div class="portfolio-pill">
+                <span class="status-dot"></span>
+                300 Startups
+            </div>
+        </header>
+
+        <section class="tab-content active" id="main-dashboard">
+            <div class="quick-menu">
+                <a href="#send-command-section" class="quick-menu-btn">
+                    Send Command ↓
+                </a>
+            </div>
+
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <span>Urgent Requests</span>
+                    <strong id="urgentCount">0</strong>
+                    <p>Requires immediate management attention</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>Pending Approvals</span>
+                    <strong id="approvalCount">0</strong>
+                    <p>Requests awaiting approval</p>
+                </div>
+
+                <div class="stat-card">
+                    <span>Commands Sent</span>
+                    <strong id="commandCount">0</strong>
+                    <p>Instructions sent to founders</p>
+                </div>
+            </section>
+
+            <section class="dashboard-layout">
+                <div class="section-card collapsible-card">
+                    <div class="collapsible-header">
+                        <div>
+                            <h3>Urgent Section</h3>
+                            <p>Urgent requests received from founders.</p>
+                        </div>
+
+                        <button class="secondary-btn collapse-toggle" id="mainUrgentToggle">
+                            Expand
+                        </button>
+                    </div>
+
+                    <div class="request-list" id="urgentRequestList"></div>
+                </div>
+
+                <div class="section-card collapsible-card">
+                    <div class="collapsible-header">
+                        <div>
+                            <h3>Approvals</h3>
+                            <p>Approval requests received from portfolio startups.</p>
+                        </div>
+
+                        <button class="secondary-btn collapse-toggle" id="mainApprovalToggle">
+                            Expand
+                        </button>
+                    </div>
+
+                    <div class="request-list" id="approvalList"></div>
+                </div>
+            </section>
+
+            <section class="section-card send-command-card" id="send-command-section">
+                <div class="section-heading">
+                    <h3>Send Command</h3>
+                    <p>Select a startup, write a command and send it directly to the founder dashboard.</p>
+                </div>
+
+                <form id="mainCommandForm" class="command-form">
+                    <div class="form-group">
+                        <label for="mainStartupSearch">Search startup</label>
+                        <input type="text" id="mainStartupSearch" placeholder="Search from 300 startups..."
+                            autocomplete="off" />
+                        <div class="search-results" id="mainStartupResults"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mainSelectedStartup">Selected startup</label>
+                        <input type="text" id="mainSelectedStartup" placeholder="No startup selected" readonly
+                            required />
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="mainCommandText">Command</label>
+                        <textarea id="mainCommandText" rows="5" placeholder="Example: Complete your proposal by today."
+                            required></textarea>
+                    </div>
+
+                    <button type="submit" class="primary-btn">Send Command</button>
+                    <p class="form-message" id="mainCommandMessage"></p>
+                </form>
+            </section>
+        </section>
+
+        <section class="tab-content" id="select-startups">
+            <section class="section-card">
+                <div class="section-heading">
+                    <h3>Select Startup</h3>
+                    <p>Search and select a startup to view detailed approvals, urgent requests, KPIs, impact report and
+                        action tools.</p>
+                </div>
+
+                <div class="startup-selector">
+                    <div class="form-group">
+                        <label for="startupSearch">Search startup</label>
+                        <input type="text" id="startupSearch" placeholder="Search startup name..." autocomplete="off" />
+                    </div>
+
+                    <div class="startup-grid" id="startupGrid"></div>
+                </div>
+            </section>
+
+            <section class="startup-dashboard hidden" id="startupDashboard">
+                <div class="startup-header">
+                    <div>
+                        <p class="eyebrow">Selected Startup</p>
+                        <h3 id="selectedStartupName">Daily Education</h3>
+                    </div>
+
+                    <span class="startup-status">Active</span>
+                </div>
+
+                <section class="startup-detail-grid">
+                    <div class="section-card collapsible-card small-card">
+                        <div class="collapsible-header">
+                            <div>
+                                <h3>Approvals</h3>
+                                <p>Startup-specific approval requests.</p>
+                            </div>
+
+                            <button class="secondary-btn collapse-toggle" id="startupApprovalToggle">
+                                Expand
+                            </button>
+                        </div>
+
+                        <div class="request-list" id="startupApprovals"></div>
+                    </div>
+
+                    <div class="section-card collapsible-card small-card">
+                        <div class="collapsible-header">
+                            <div>
+                                <h3>Urgent Requests</h3>
+                                <p>Startup-specific urgent matters.</p>
+                            </div>
+
+                            <button class="secondary-btn collapse-toggle" id="startupUrgentToggle">
+                                Expand
+                            </button>
+                        </div>
+
+                        <div class="request-list" id="startupUrgentRequests"></div>
+                    </div>
+                </section>
+
+                <section class="startup-detail-grid">
+                    <div class="section-card">
+                        <div class="section-heading">
+                            <h3>Weekly KPIs</h3>
+                            <p>Short-cycle performance indicators.</p>
+                        </div>
+
+                        <div class="kpi-grid" id="weeklyKpis"></div>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-heading">
+                            <h3>Monthly KPIs</h3>
+                            <p>Monthly reporting indicators.</p>
+                        </div>
+
+                        <div class="kpi-grid" id="monthlyKpis"></div>
+                    </div>
+                </section>
+
+                <section class="startup-detail-grid">
+                    <div class="section-card">
+                        <div class="section-heading">
+                            <h3>Send Command</h3>
+                            <p>Send a direct task or instruction to this startup.</p>
+                        </div>
+
+                        <form id="startupCommandForm" class="single-form">
+                            <div class="form-group">
+                                <label for="startupCommandText">Command</label>
+                                <textarea id="startupCommandText" rows="5"
+                                    placeholder="Write command for the selected startup..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="primary-btn">Send Command</button>
+                            <p class="form-message" id="startupCommandMessage"></p>
+                        </form>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-heading">
+                            <h3>Schedule Meeting</h3>
+                            <p>Schedule a meeting with the selected startup.</p>
+                        </div>
+
+                        <form id="scheduleMeetingForm" class="single-form">
+                            <div class="form-group">
+                                <label for="meetingTitle">Meeting title</label>
+                                <input type="text" id="meetingTitle" placeholder="Example: KPI review meeting"
+                                    required />
+                            </div>
+
+                            <div class="two-column">
+                                <div class="form-group">
+                                    <label for="meetingDate">Date</label>
+                                    <input type="date" id="meetingDate" required />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="meetingTime">Time</label>
+                                    <input type="time" id="meetingTime" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="meetingAgenda">Agenda</label>
+                                <textarea id="meetingAgenda" rows="4" placeholder="Write meeting agenda..."
+                                    required></textarea>
+                            </div>
+
+                            <button type="submit" class="primary-btn">Schedule Meeting</button>
+                            <p class="form-message" id="meetingMessage"></p>
+                        </form>
+                    </div>
+                </section>
+
+                <section class="section-card">
+                    <div class="section-heading">
+                        <h3>Impact Report KPI</h3>
+                        <p>Environmental, social and economic impact indicators for the selected startup.</p>
+                    </div>
+
+                    <div class="impact-grid" id="impactKpis"></div>
+                </section>
+            </section>
+        </section>
+    </main>
+
+    <script src="management-dashboard.js"></script>
+</body>
+
+</html>
