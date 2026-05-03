@@ -1,7 +1,6 @@
 const managementLoginForm = document.getElementById("managementLoginForm");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
-const accessCodeInput = document.getElementById("accessCode");
 const togglePasswordBtn = document.getElementById("togglePassword");
 const formMessage = document.getElementById("formMessage");
 
@@ -17,27 +16,15 @@ managementLoginForm.addEventListener("submit", (event) => {
 
   const email = emailInput.value.trim();
   const password = passwordInput.value.trim();
-  const accessCode = accessCodeInput.value.trim();
 
-  if (!email || !password || !accessCode) {
-    formMessage.textContent = "Please enter your email address, password and access code.";
+  if (!email || !password) {
+    formMessage.textContent = "Please enter your email address and password.";
     return;
   }
 
   formMessage.textContent = "Management login submitted successfully.";
 
-  setTimeout(() => { window.location.href = "management-dashboard.html"; }, 800);
-
-  /*
-    Replace this placeholder logic with your real authentication request.
-
-    Example:
-    fetch("/api/auth/management-login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ email, password, accessCode })
-    });
-  */
+  setTimeout(() => {
+    window.location.href = "management-dashboard.html";
+  }, 800);
 });

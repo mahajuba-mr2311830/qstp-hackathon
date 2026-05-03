@@ -440,7 +440,7 @@ function setupSearch(inputId, resultsId, selectedInputId) {
     });
 }
 
-setupSearch("mainStartupSearch", "mainStartupResults", "mainSelectedStartup");
+setupSearch("mainStartupSearch", "mainStartupResults", null);
 
 const mainCommandForm = document.getElementById("mainCommandForm");
 
@@ -448,7 +448,7 @@ mainCommandForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const command = {
-        company: document.getElementById("mainSelectedStartup").value,
+        company: document.getElementById("mainStartupSearch").value.trim(),
         message: document.getElementById("mainCommandText").value.trim(),
         sentAt: new Date().toLocaleString()
     };

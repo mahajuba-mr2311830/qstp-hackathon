@@ -3,41 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Founder Sign In | Pulse Digest</title>
+  <title>Founder Login | Pulse Digest</title>
   <link rel="stylesheet" href="founder-login.css" />
 </head>
 <body>
   <main class="login-page">
-    <section class="login-left">
-      <a href="index.html" class="back-link">← Back to Pulse Digest</a>
-
-      <div class="brand-block">
-        <p class="eyebrow">Founder Access</p>
-        <h1>Sign in to your founder profile</h1>
-        <p>
-          Access your company dashboard, review AI-pulled social updates, manage profile details and track your latest visibility metrics.
-        </p>
-      </div>
-
-      <div class="feature-list">
-        <div class="feature-item">
-          <span>01</span>
-          <p>Connect company social media accounts for automated post collection.</p>
-        </div>
-
-        <div class="feature-item">
-          <span>02</span>
-          <p>Review how your latest company updates appear in the Pulse Digest dashboard.</p>
-        </div>
-
-        <div class="feature-item">
-          <span>03</span>
-          <p>Keep company information accurate for management and programme teams.</p>
-        </div>
-      </div>
-    </section>
-
     <section class="login-card">
+      <a href="index.html" class="back-link">← Back to Pulse Digest</a>
       <div class="login-header">
         <h2>Founder Login</h2>
         <p>Please enter your details to continue.</p>
@@ -46,24 +18,24 @@
       <form id="founderLoginForm">
         <div class="form-group">
           <label for="email">Email address</label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email" 
-            placeholder="founder@company.com" 
-            required 
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="founder@company.com"
+            required
           />
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
           <div class="password-wrapper">
-            <input 
-              type="password" 
-              id="password" 
-              name="password" 
-              placeholder="Enter your password" 
-              required 
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              required
             />
             <button type="button" id="togglePassword">Show</button>
           </div>
@@ -82,14 +54,6 @@
 
         <p class="form-message" id="formMessage"></p>
       </form>
-
-      <div class="divider">
-        <span></span>
-        <p>or</p>
-        <span></span>
-      </div>
-
-      <button class="secondary-btn">Request founder access</button>
     </section>
   </main>
 

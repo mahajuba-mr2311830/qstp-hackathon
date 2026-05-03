@@ -1,52 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Management Sign In | Pulse Digest</title>
+  <title>Management Login | Pulse Digest</title>
   <link rel="stylesheet" href="management-login.css" />
 </head>
+
 <body>
   <main class="login-page">
-    <section class="login-left">
+    <section class="login-card">
       <a href="index.html" class="back-link">← Back to Pulse Digest</a>
 
-      <div class="brand-block">
-        <p class="eyebrow">Management Access</p>
-        <h1>Sign in to your management dashboard</h1>
-        <p>
-          Review company activity, monitor portfolio visibility, track founder updates and access AI-summarised social media insights in one focused workspace.
-        </p>
-      </div>
-
-      <div class="feature-grid">
-        <div class="feature-card">
-          <span>01</span>
-          <h3>Portfolio Overview</h3>
-          <p>Monitor company updates and public activity across the full portfolio.</p>
-        </div>
-
-        <div class="feature-card">
-          <span>02</span>
-          <h3>AI Digest</h3>
-          <p>View summarised social posts without manually checking each platform.</p>
-        </div>
-
-        <div class="feature-card">
-          <span>03</span>
-          <h3>Founder Tracking</h3>
-          <p>Identify active companies, inactive profiles and recent communication trends.</p>
-        </div>
-
-        <div class="feature-card">
-          <span>04</span>
-          <h3>Decision Support</h3>
-          <p>Use visibility metrics to support reporting, engagement and programme reviews.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="login-card">
       <div class="login-header">
         <div class="admin-icon">M</div>
         <h2>Management Login</h2>
@@ -56,38 +22,15 @@
       <form id="managementLoginForm">
         <div class="form-group">
           <label for="email">Work email address</label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email" 
-            placeholder="manager@organisation.com" 
-            required 
-          />
+          <input type="email" id="email" name="email" placeholder="manager@organisation.com" required />
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
           <div class="password-wrapper">
-            <input 
-              type="password" 
-              id="password" 
-              name="password" 
-              placeholder="Enter your password" 
-              required 
-            />
+            <input type="password" id="password" name="password" placeholder="Enter your password" required />
             <button type="button" id="togglePassword">Show</button>
           </div>
-        </div>
-
-        <div class="form-group">
-          <label for="accessCode">Access code</label>
-          <input 
-            type="text" 
-            id="accessCode" 
-            name="accessCode" 
-            placeholder="Enter management access code" 
-            required 
-          />
         </div>
 
         <div class="form-options">
@@ -103,16 +46,10 @@
 
         <p class="form-message" id="formMessage"></p>
       </form>
-
-      <div class="security-note">
-        <h3>Secure access</h3>
-        <p>
-          Management access is restricted to authorised users only. All activity should be verified through the official dashboard authentication system.
-        </p>
-      </div>
     </section>
   </main>
 
   <script src="management-login.js"></script>
 </body>
+
 </html>

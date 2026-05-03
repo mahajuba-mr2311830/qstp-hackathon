@@ -85,11 +85,20 @@
                 </div>
             </section>
 
+            <section class="section-card milestone-card">
+                <div class="section-heading">
+                    <h3>Milestone Timeline</h3>
+                    <p>Latest startup milestones shown in descending order.</p>
+                </div>
+
+                <div class="milestone-timeline" id="milestoneTimeline"></div>
+            </section>
+
             <section class="dashboard-layout">
                 <div class="section-card collapsible-card">
                     <div class="collapsible-header">
                         <div>
-                            <h3>Urgent Section</h3>
+                            <h3>Urgent</h3>
                             <p>Urgent requests received from founders.</p>
                         </div>
 
@@ -117,15 +126,6 @@
                 </div>
             </section>
 
-            <section class="section-card milestone-card">
-                <div class="section-heading">
-                    <h3>Milestone Timeline</h3>
-                    <p>Latest startup milestones shown in descending order.</p>
-                </div>
-
-                <div class="milestone-timeline" id="milestoneTimeline"></div>
-            </section>
-
             <section class="section-card send-command-card" id="send-command-section">
                 <div class="section-heading">
                     <h3>Send Command</h3>
@@ -134,26 +134,21 @@
 
                 <form id="mainCommandForm" class="command-form">
                     <div class="form-group">
-                        <label for="mainStartupSearch">Search startup</label>
-                        <input type="text" id="mainStartupSearch" placeholder="Search from 300 startups..."
-                            autocomplete="off" />
-                        <div class="search-results" id="mainStartupResults"></div>
-                    </div>
+                        <div class="form-group">
+                            <label for="mainStartupSearch">Search startup</label>
+                            <input type="text" id="mainStartupSearch" placeholder="Search and select startup..."
+                                autocomplete="off" required />
+                            <div class="search-results" id="mainStartupResults"></div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="mainSelectedStartup">Selected startup</label>
-                        <input type="text" id="mainSelectedStartup" placeholder="No startup selected" readonly
-                            required />
-                    </div>
+                        <div class="form-group full-width">
+                            <label for="mainCommandText">Command</label>
+                            <textarea id="mainCommandText" rows="5"
+                                placeholder="Example: Complete your proposal by today." required></textarea>
+                        </div>
 
-                    <div class="form-group full-width">
-                        <label for="mainCommandText">Command</label>
-                        <textarea id="mainCommandText" rows="5" placeholder="Example: Complete your proposal by today."
-                            required></textarea>
-                    </div>
-
-                    <button type="submit" class="primary-btn">Send Command</button>
-                    <p class="form-message" id="mainCommandMessage"></p>
+                        <button type="submit" class="primary-btn">Send Command</button>
+                        <p class="form-message" id="mainCommandMessage"></p>
                 </form>
             </section>
         </section>
