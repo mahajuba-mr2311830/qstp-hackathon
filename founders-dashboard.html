@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Founder Dashboard | Pulse Digest</title>
   <link rel="stylesheet" href="founders-dashboard.css" />
 </head>
-
 <body>
   <aside class="sidebar">
     <div class="brand">
@@ -19,13 +17,14 @@
     </div>
 
     <nav class="menu">
-      <button class="menu-item active" data-tab="send-request">Send Request</button>
+      <button class="menu-item active" data-tab="main-dashboard">Main Dashboard</button>
+      <button class="menu-item" data-tab="send-request">Send Request</button>
       <button class="menu-item" data-tab="kpi-forms">KPI Forms</button>
       <button class="menu-item" data-tab="urgent-request">Urgent Request</button>
       <button class="menu-item" data-tab="todo-list">To-do List</button>
       <button class="menu-item" data-tab="view-meetings">View Meetings</button>
       <button class="menu-item" data-tab="request-meeting">Request Meeting</button>
-      <button class="menu-item" data-tab="pitch-deck">Pitch Deck</button>
+      <button class="menu-item" data-tab="pitch-deck">Pitch Deck Builder</button>
     </nav>
 
     <a href="index.html" class="logout-link">← Back to Home</a>
@@ -35,16 +34,96 @@
     <header class="topbar">
       <div>
         <p class="eyebrow">Founder Dashboard</p>
-        <h2 id="pageTitle">Send Request</h2>
+        <h2 id="pageTitle">Main Dashboard</h2>
       </div>
 
-      <div class="profile-pill">
-        <span class="status-dot"></span>
-        Founder Account
+      <div class="topbar-actions">
+        <div class="notification-wrapper">
+          <button class="notification-btn" id="founderNotificationBtn" aria-label="Open notifications">
+            🔔
+            <span class="notification-count" id="founderNotificationCount">3</span>
+          </button>
+
+          <div class="notification-panel" id="founderNotificationPanel">
+            <div class="notification-header">
+              <h3>Reminders & Notifications</h3>
+              <button id="closeFounderNotifications">×</button>
+            </div>
+
+            <div class="notification-list" id="founderNotificationList"></div>
+          </div>
+        </div>
+
+        <div class="profile-pill">
+          <span class="status-dot"></span>
+          Founder Account
+        </div>
       </div>
     </header>
 
-    <section class="tab-content active" id="send-request">
+    <section class="tab-content active" id="main-dashboard">
+      <section class="main-dashboard-grid">
+        <div class="section-card">
+          <div class="section-heading">
+            <h3>To-do List</h3>
+            <p>Tasks assigned by management for completion.</p>
+          </div>
+
+          <div class="dashboard-todo-list" id="dashboardTodoList"></div>
+
+          <button class="secondary-btn dashboard-link-btn" data-go-tab="todo-list">
+            View Full To-do List
+          </button>
+        </div>
+
+        <div class="section-card">
+          <div class="section-heading">
+            <h3>Quick KPI Entry</h3>
+            <p>Submit key metrics quickly without building the full KPI form.</p>
+          </div>
+
+          <form id="quickKpiForm" class="quick-kpi-form">
+            <div class="form-group">
+              <label for="quickRevenue">Revenue</label>
+              <input type="text" id="quickRevenue" placeholder="Example: QAR 42,000" />
+            </div>
+
+            <div class="form-group">
+              <label for="quickPocConverted">POCs Converted</label>
+              <input type="text" id="quickPocConverted" placeholder="Example: 4" />
+            </div>
+
+            <div class="form-group">
+              <label for="quickNewHiring">New Hiring</label>
+              <input type="text" id="quickNewHiring" placeholder="Example: 2 new hires" />
+            </div>
+
+            <div class="form-group">
+              <label for="quickOtherKpi">Add Other</label>
+              <input type="text" id="quickOtherKpi" placeholder="Example: 3 new partnerships" />
+            </div>
+
+            <button type="submit" class="primary-btn">Submit Quick KPI</button>
+            <p class="form-message" id="quickKpiMessage"></p>
+          </form>
+        </div>
+
+        <div class="section-card">
+          <div class="section-heading">
+            <h3>Confirmed Meetings</h3>
+            <p>Review meetings confirmed with management.</p>
+          </div>
+
+          <div class="dashboard-meeting-list" id="dashboardConfirmedMeetings"></div>
+
+          <button class="secondary-btn dashboard-link-btn" data-go-tab="view-meetings">
+            View All Meetings
+          </button>
+        </div>
+      </section>
+    </section>
+
+    <section class="tab-content" id="send-request">
       <div class="section-card">
         <div class="section-heading">
           <h3>Send approval request</h3>
@@ -54,8 +133,7 @@
         <form id="sendRequestForm" class="form-grid">
           <div class="form-group">
             <label for="requestTitle">Request title</label>
-            <input type="text" id="requestTitle" placeholder="Example: Budget approval for marketing campaign"
-              required />
+            <input type="text" id="requestTitle" placeholder="Example: Budget approval for marketing campaign" required />
           </div>
 
           <div class="form-group">
@@ -73,8 +151,7 @@
 
           <div class="form-group full-width">
             <label for="requestMessage">Request details</label>
-            <textarea id="requestMessage" rows="7"
-              placeholder="Write the details of the request, justification and expected outcome..." required></textarea>
+            <textarea id="requestMessage" rows="7" placeholder="Write the details of the request, justification and expected outcome..." required></textarea>
           </div>
 
           <div class="form-group full-width">
@@ -95,80 +172,80 @@
           <p>Select the KPIs to report. The form will be built only for the selected indicators.</p>
         </div>
 
-        <div class="kpi-grid" id="kpiGrid">
-          <label class="kpi-card">
+        <div class="kpi-grid-selector">
+          <label class="kpi-card-selector">
             <input type="checkbox" value="Revenue" data-frequency="Monthly" />
             <span>Revenue</span>
             <small>Monthly</small>
           </label>
 
-          <label class="kpi-card">
+          <label class="kpi-card-selector">
             <input type="checkbox" value="Funding Raised" data-frequency="Monthly" />
             <span>Funding Raised</span>
             <small>Monthly</small>
           </label>
 
-          <label class="kpi-card">
-            <input type="checkbox" value="POC Assigned vs Converted" data-frequency="Monthly" />
-            <span>POC Assigned vs Converted</span>
+          <label class="kpi-card-selector">
+            <input type="checkbox" value="User Growth" data-frequency="Monthly" />
+            <span>User Growth</span>
             <small>Monthly</small>
           </label>
 
-          <label class="kpi-card">
-            <input type="checkbox" value="Headcount" data-frequency="Monthly" />
-            <span>Headcount</span>
+          <label class="kpi-card-selector">
+            <input type="checkbox" value="Customer Retention" data-frequency="Monthly" />
+            <span>Customer Retention</span>
             <small>Monthly</small>
           </label>
 
-          <label class="kpi-card">
-            <input type="checkbox" value="Runway" data-frequency="Monthly" />
-            <span>Runway</span>
+          <label class="kpi-card-selector">
+            <input type="checkbox" value="POCs Signed" data-frequency="Monthly" />
+            <span>POCs Signed</span>
             <small>Monthly</small>
           </label>
 
-          <label class="kpi-card">
-            <input type="checkbox" value="Product Milestones" data-frequency="Weekly" />
-            <span>Product Milestones</span>
-            <small>Weekly</small>
-          </label>
-
-          <label class="kpi-card">
-            <input type="checkbox" value="IP Filing" data-frequency="Monthly" />
-            <span>IP Filing</span>
+          <label class="kpi-card-selector">
+            <input type="checkbox" value="POCs Converted" data-frequency="Monthly" />
+            <span>POCs Converted</span>
             <small>Monthly</small>
           </label>
 
-          <label class="kpi-card">
+          <label class="kpi-card-selector">
             <input type="checkbox" value="Partnerships" data-frequency="Monthly" />
             <span>Partnerships</span>
             <small>Monthly</small>
           </label>
 
-          <label class="kpi-card">
-            <input type="checkbox" value="Subsidy Update" data-frequency="Monthly" />
-            <span>Subsidy Update</span>
+          <label class="kpi-card-selector">
+            <input type="checkbox" value="Headcount" data-frequency="Monthly" />
+            <span>Headcount</span>
             <small>Monthly</small>
           </label>
 
-          <label class="kpi-card">
-            <input type="checkbox" value="Jobs Created" data-frequency="Monthly" />
-            <span>Jobs Created</span>
+          <label class="kpi-card-selector">
+            <input type="checkbox" value="Runway" data-frequency="Monthly" />
+            <span>Runway</span>
             <small>Monthly</small>
           </label>
 
-          <label class="kpi-card">
+          <label class="kpi-card-selector">
+            <input type="checkbox" value="Product Milestones" data-frequency="Weekly" />
+            <span>Product Milestones</span>
+            <small>Weekly</small>
+          </label>
+
+          <label class="kpi-card-selector">
             <input type="checkbox" value="Mentorship Hours" data-frequency="Weekly" />
             <span>Mentorship Hours</span>
             <small>Weekly</small>
           </label>
 
-          <label class="kpi-card">
-            <input type="checkbox" value="Exits" data-frequency="Monthly" />
-            <span>Exits</span>
+          <label class="kpi-card-selector">
+            <input type="checkbox" value="Jobs Created" data-frequency="Monthly" />
+            <span>Jobs Created</span>
             <small>Monthly</small>
           </label>
 
-          <label class="kpi-card other-card">
+          <label class="kpi-card-selector other-card">
             <input type="checkbox" value="Other" data-frequency="Custom" id="otherKpiCheck" />
             <span>Other KPI</span>
             <small>Custom</small>
@@ -181,7 +258,7 @@
         </div>
 
         <div class="action-row">
-          <button class="primary-btn" id="buildFormBtn">Build Form</button>
+          <button class="primary-btn" id="buildFormBtn" type="button">Build Form</button>
           <p class="form-message" id="kpiSelectMessage"></p>
         </div>
       </div>
@@ -248,7 +325,7 @@
 
         <div class="todo-input">
           <input type="text" id="newTodoInput" placeholder="Demo only: add a task received from management" />
-          <button class="primary-btn" id="addTodoBtn">Add</button>
+          <button class="primary-btn" id="addTodoBtn" type="button">Add</button>
         </div>
 
         <div class="todo-list" id="todoList"></div>
@@ -323,41 +400,136 @@
     <section class="tab-content" id="pitch-deck">
       <div class="section-card">
         <div class="section-heading">
-          <h3>Pitch deck</h3>
-          <p>Upload and manage the latest pitch deck for management review.</p>
+          <h3>Pitch Deck Builder</h3>
+          <p>Personalise an investor-ready pitch deck template using startup data and KPI insights.</p>
         </div>
 
-        <form id="pitchDeckForm" class="form-grid">
-          <div class="form-group">
-            <label for="deckTitle">Deck title</label>
-            <input type="text" id="deckTitle" placeholder="Example: Q3 Investor Pitch Deck" required />
+        <div class="pitch-builder-layout">
+          <div class="pitch-left-panel">
+            <div class="pitch-panel-header">
+              <div>
+                <h4>Deck Slides</h4>
+                <p>Click any slide to open and edit it.</p>
+              </div>
+              <button class="secondary-btn" id="openPreviewModeBtn" type="button">Full Preview</button>
+            </div>
+
+            <div class="slide-grid" id="slideGrid"></div>
           </div>
 
-          <div class="form-group">
-            <label for="deckVersion">Version</label>
-            <input type="text" id="deckVersion" placeholder="Example: v1.2" required />
+          <div class="pitch-right-panel">
+            <div class="pitch-editor-header">
+              <div>
+                <h4 id="editorPanelHeading">Edit Slide</h4>
+                <p>Update the selected slide content and layout.</p>
+              </div>
+
+              <div class="sync-indicator-wrap">
+                <span class="sync-indicator" id="kpiSyncBadge">KPI Data Synced</span>
+              </div>
+            </div>
+
+            <form id="slideEditorForm" class="slide-editor-form">
+              <div class="form-group">
+                <label for="editorSlideTitle">Slide title</label>
+                <input type="text" id="editorSlideTitle" required />
+              </div>
+
+              <div class="form-group">
+                <label for="editorVisualLayout">Visual layout</label>
+                <select id="editorVisualLayout">
+                  <option>Title + Text</option>
+                  <option>Title + Two Columns</option>
+                  <option>Title + Metrics</option>
+                  <option>Title + Chart</option>
+                  <option>Title + Team Grid</option>
+                </select>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="editorSlideContent">Main text / content</label>
+                <textarea id="editorSlideContent" rows="8" placeholder="Edit the slide content here..." required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="editorMetricsFocus">Charts or metrics</label>
+                <select id="editorMetricsFocus">
+                  <option>None</option>
+                  <option>Revenue Metrics</option>
+                  <option>Growth Metrics</option>
+                  <option>Partnership Metrics</option>
+                  <option>KPI Dashboard</option>
+                  <option>Impact Metrics</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="editorDesignStyle">Design style</label>
+                <select id="editorDesignStyle">
+                  <option>Professional</option>
+                  <option>Minimal</option>
+                  <option>Investor Focused</option>
+                  <option>Data Driven</option>
+                </select>
+              </div>
+
+              <div class="editor-actions">
+                <button class="primary-btn" id="saveSlideChangesBtn" type="submit">Save Changes</button>
+                <button class="secondary-btn" id="previewSelectedSlideBtn" type="button">Preview Slide</button>
+                <button class="secondary-btn" id="applyDeckChangesBtn" type="button">Apply to Deck</button>
+              </div>
+
+              <p class="form-message" id="slideEditorMessage"></p>
+            </form>
+
+            <div class="slide-preview-wrapper">
+              <div class="preview-header">
+                <h4>Selected Slide Preview</h4>
+              </div>
+              <div class="slide-preview-card" id="selectedSlidePreview"></div>
+            </div>
+
+            <div class="pitch-export-panel">
+              <div class="section-heading compact">
+                <h3>Final Preview and Download</h3>
+                <p>Review the full deck and export it in your preferred format.</p>
+              </div>
+
+              <div class="export-actions">
+                <button class="secondary-btn" id="downloadPdfBtn" type="button">Download as PDF</button>
+                <button class="secondary-btn" id="downloadPptxBtn" type="button">Download as PPTX</button>
+                <button class="primary-btn" id="exportDeckBtn" type="button">Export Pitch Deck</button>
+              </div>
+
+              <p class="form-message" id="pitchDeckMessage"></p>
+            </div>
           </div>
-
-          <div class="form-group full-width">
-            <label for="deckFile">Upload pitch deck</label>
-            <input type="file" id="deckFile" accept="application/pdf,.ppt,.pptx" required />
-          </div>
-
-          <div class="form-group full-width">
-            <label for="deckNotes">Notes for management</label>
-            <textarea id="deckNotes" rows="5" placeholder="Add any notes, changes or review instructions..."></textarea>
-          </div>
-
-          <button type="submit" class="primary-btn">Submit Pitch Deck</button>
-          <p class="form-message" id="pitchDeckMessage"></p>
-        </form>
-
-        <div class="submitted-decks" id="submittedDecks"></div>
+        </div>
       </div>
     </section>
   </main>
 
+  <div class="presentation-modal" id="presentationModal">
+    <div class="presentation-modal-content">
+      <div class="presentation-topbar">
+        <div>
+          <h3>Pitch Deck Presentation Preview</h3>
+          <p>Review the complete deck slide by slide.</p>
+        </div>
+
+        <button class="close-modal-btn" id="closePresentationModal" type="button">×</button>
+      </div>
+
+      <div class="presentation-stage" id="presentationStage"></div>
+
+      <div class="presentation-controls">
+        <button class="secondary-btn" id="prevPresentationSlideBtn" type="button">Previous</button>
+        <span id="presentationCounter">1 / 9</span>
+        <button class="secondary-btn" id="nextPresentationSlideBtn" type="button">Next</button>
+      </div>
+    </div>
+  </div>
+
   <script src="founders-dashboard.js"></script>
 </body>
-
 </html>

@@ -631,3 +631,70 @@ sendCommandShortcut.addEventListener("click", (event) => {
 
 renderMainDashboard();
 renderStartupGrid();
+
+const managementNotifications = [
+    {
+        title: "Review urgent request",
+        message: "Review: urgent request from Daily Education.",
+        time: "Today, 09:20 AM"
+    },
+    {
+        title: "Approval pending",
+        message: "BuildingFuture is waiting for prototype procurement approval.",
+        time: "Today, 10:05 AM"
+    },
+    {
+        title: "WaterTech field testing",
+        message: "WaterTech requested support for field testing access.",
+        time: "Today, 11:15 AM"
+    },
+    {
+        title: "Monthly KPI review",
+        message: "Review submitted monthly KPI updates from active startups.",
+        time: "Due this week"
+    }
+];
+
+const managementNotificationBtn = document.getElementById("managementNotificationBtn");
+const managementNotificationPanel = document.getElementById("managementNotificationPanel");
+const closeManagementNotifications = document.getElementById("closeManagementNotifications");
+const managementNotificationList = document.getElementById("managementNotificationList");
+const managementNotificationCount = document.getElementById("managementNotificationCount");
+
+function renderManagementNotifications() {
+    managementNotificationList.innerHTML = "";
+    managementNotificationCount.textContent = managementNotifications.length;
+
+    managementNotifications.forEach((notification) => {
+        const item = document.createElement("div");
+        item.className = "notification-item";
+
+        item.innerHTML = `
+      <h4>${notification.title}</h4>
+      <p>${notification.message}</p>
+      <small>${notification.time}</small>
+    `;
+
+        managementNotificationList.appendChild(item);
+    });
+}
+
+managementNotificationBtn.addEventListener("click", () => {
+    managementNotificationPanel.classList.toggle("active");
+});
+
+closeManagementNotifications.addEventListener("click", () => {
+    managementNotificationPanel.classList.remove("active");
+});
+
+document.addEventListener("click", (event) => {
+    const clickedInsideNotifications =
+        managementNotificationPanel.contains(event.target) ||
+        managementNotificationBtn.contains(event.target);
+
+    if (!clickedInsideNotifications) {
+        managementNotificationPanel.classList.remove("active");
+    }
+});
+
+renderManagementNotifications();
