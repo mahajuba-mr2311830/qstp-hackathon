@@ -1356,6 +1356,27 @@ function calculateXpAndMomentum() {
       meter.description.textContent = "Strong KPI reporting, positive growth streak and active milestone progress indicate scaling momentum.";
     }
   });
+  
+  const kpiCurrentMomentum = document.getElementById("kpiCurrentMomentum");
+
+  if (kpiCurrentMomentum) {
+    if (momentumScore < 40) {
+      kpiCurrentMomentum.textContent = "🔴 Losing momentum";
+      kpiCurrentMomentum.style.background = "#fff0f3";
+      kpiCurrentMomentum.style.color = "var(--danger)";
+      kpiCurrentMomentum.style.borderColor = "#ffd0da";
+    } else if (momentumScore < 70) {
+      kpiCurrentMomentum.textContent = "🟡 Stable";
+      kpiCurrentMomentum.style.background = "#fff7e8";
+      kpiCurrentMomentum.style.color = "var(--amber)";
+      kpiCurrentMomentum.style.borderColor = "#ffe4b5";
+    } else {
+      kpiCurrentMomentum.textContent = "🟢 Scaling";
+      kpiCurrentMomentum.style.background = "#eaf8f0";
+      kpiCurrentMomentum.style.color = "var(--green)";
+      kpiCurrentMomentum.style.borderColor = "#c8e9d6";
+    }
+  }
 }
 
 renderLeaderboard();
