@@ -138,6 +138,27 @@ let approvals = [
 
 let commands = [];
 
+let milestones = [
+    {
+        date: "3rd May",
+        company: "Daily Education",
+        title: "New strategic partnership",
+        description: "Daily Education made a new partnership with Vodafone."
+    },
+    {
+        date: "3rd May",
+        company: "BuildingFuture",
+        title: "Team expansion",
+        description: "BuildingFuture is now a team of 10 people, previously 8."
+    },
+    {
+        date: "2nd May",
+        company: "WaterTech",
+        title: "Highest revenue reported",
+        description: "WaterTech reported their highest revenue since 2024."
+    }
+];
+
 let expandedState = {
     mainUrgent: false,
     mainApprovals: false,
@@ -698,3 +719,30 @@ document.addEventListener("click", (event) => {
 });
 
 renderManagementNotifications();
+
+function renderMilestoneTimeline() {
+    const milestoneTimeline = document.getElementById("milestoneTimeline");
+
+    if (!milestoneTimeline) {
+        return;
+    }
+
+    milestoneTimeline.innerHTML = "";
+
+    milestones.forEach((milestone) => {
+        const item = document.createElement("div");
+        item.className = "milestone-item";
+
+        item.innerHTML = `
+      <span class="milestone-date">${milestone.date}</span>
+      <h4>${milestone.company} — ${milestone.title}</h4>
+      <p>${milestone.description}</p>
+    `;
+
+        milestoneTimeline.appendChild(item);
+    });
+}
+
+renderMainDashboard();
+renderMilestoneTimeline();
+renderStartupGrid();

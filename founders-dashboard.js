@@ -10,6 +10,8 @@ const pageTitle = document.getElementById("pageTitle");
 
 const tabTitles = {
   "main-dashboard": "Main Dashboard",
+  "leaderboard": "Leaderboard",
+  "badges": "Badges",
   "send-request": "Send Request",
   "kpi-forms": "KPI Forms",
   "urgent-request": "Urgent Request",
@@ -1020,6 +1022,333 @@ if (submittedKpiEntries.length > 0) {
   kpiDashboard.classList.remove("hidden");
 }
 
+/* Leaderboard and Badges */
+
+const leaderboardData = {
+  weekly: [
+    {
+      startup: "Daily Education",
+      rank: 1,
+      score: 96,
+      reason: "Most consistent weekly reporter with complete KPI updates.",
+      tags: ["Most Consistent Reporter", "KPI Complete", "On Time"],
+      hearts: 18,
+      claps: 24
+    },
+    {
+      startup: "WaterTech",
+      rank: 2,
+      score: 91,
+      reason: "Strong revenue update and active POC progress this week.",
+      tags: ["Revenue Growth", "POC Progress"],
+      hearts: 14,
+      claps: 21
+    },
+    {
+      startup: "BuildingFuture",
+      rank: 3,
+      score: 87,
+      reason: "Team growth and timely milestone reporting.",
+      tags: ["Team Growth", "Milestone Update"],
+      hearts: 11,
+      claps: 19
+    }
+  ],
+  monthly: [
+    {
+      startup: "WaterTech",
+      rank: 1,
+      score: 98,
+      reason: "Highest monthly growth across revenue, POCs and partnerships.",
+      tags: ["Monthly Champion", "Highest Revenue", "Partnerships"],
+      hearts: 31,
+      claps: 42
+    },
+    {
+      startup: "Daily Education",
+      rank: 2,
+      score: 94,
+      reason: "Strong customer traction and repeated on-time KPI reporting.",
+      tags: ["Customer Growth", "On Time"],
+      hearts: 26,
+      claps: 36
+    },
+    {
+      startup: "HealthAI",
+      rank: 3,
+      score: 89,
+      reason: "Consistent progress on pilots and clinical partner engagement.",
+      tags: ["Pilot Progress", "Consistent Reporter"],
+      hearts: 20,
+      claps: 28
+    }
+  ],
+  alltime: [
+    {
+      startup: "Daily Education",
+      rank: 1,
+      score: 985,
+      reason: "Outstanding long-term consistency, traction and investor readiness.",
+      tags: ["All-time Great", "Investor Ready", "Reliable Reporter"],
+      hearts: 156,
+      claps: 230
+    },
+    {
+      startup: "WaterTech",
+      rank: 2,
+      score: 941,
+      reason: "Strong commercial progress and high-value utility partnerships.",
+      tags: ["Commercial Traction", "Impact Leader"],
+      hearts: 132,
+      claps: 211
+    },
+    {
+      startup: "BuildingFuture",
+      rank: 3,
+      score: 902,
+      reason: "Strong milestone completion and product development discipline.",
+      tags: ["Milestone Master", "Product Progress"],
+      hearts: 119,
+      claps: 198
+    }
+  ]
+};
+
+let currentLeaderboardType = "weekly";
+
+const founderBadges = [
+  {
+    icon: "🏆",
+    title: "Milestone Master",
+    description: "Completed 10+ verified product milestones.",
+    earned: true
+  },
+  {
+    icon: "💸",
+    title: "Investor Favorite",
+    description: "Secured funding from 3+ investors or reached a target funding amount.",
+    earned: true
+  },
+  {
+    icon: "📊",
+    title: "Consistent Reporter",
+    description: "Submitted complete KPI updates for multiple reporting cycles.",
+    earned: true
+  },
+  {
+    icon: "🚀",
+    title: "Growth Climber",
+    description: "Reported positive revenue or user growth across several periods.",
+    earned: true
+  },
+  {
+    icon: "🤝",
+    title: "Partnership Builder",
+    description: "Closed or reported multiple verified strategic partnerships.",
+    earned: false
+  },
+  {
+    icon: "🦄",
+    title: "Unicorn Tier",
+    description: "Reached exceptional scale, growth and investor traction.",
+    earned: false
+  }
+];
+
+function renderLeaderboard(type = currentLeaderboardType) {
+  const leaderboardList = document.getElementById("leaderboardList");
+
+  if (!leaderboardList) {
+    return;
+  }
+
+  leaderboardList.innerHTML = "";
+  currentLeaderboardType = type;
+
+  leaderboardData[type].forEach((item, index) => {
+    const card = document.createElement("div");
+    card.className = "leaderboard-card";
+
+    card.innerHTML = `
+      <div class="leaderboard-rank">#${item.rank}</div>
+
+      <div class="leaderboard-main">
+        <h4>${item.startup}</h4>
+        <p>${item.reason}</p>
+        <div class="leaderboard-tags">
+          ${item.tags.map((tag) => `<span>${tag}</span>`).join("")}
+        </div>
+      </div>
+
+      <div class="leaderboard-score">
+        <strong>${item.score} pts</strong>
+        <div class="emoji-actions">
+          <button class="emoji-btn" data-board="${type}" data-index="${index}" data-reaction="heart">
+            ❤️ ${item.hearts}
+          </button>
+          <button class="emoji-btn" data-board="${type}" data-index="${index}" data-reaction="clap">
+            👏 ${item.claps}
+          </button>
+        </div>
+      </div>
+    `;
+
+    leaderboardList.appendChild(card);
+  });
+
+  document.querySelectorAll(".emoji-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const board = button.dataset.board;
+      const index = Number(button.dataset.index);
+      const reaction = button.dataset.reaction;
+
+      if (reaction === "heart") {
+        leaderboardData[board][index].hearts += 1;
+      }
+
+      if (reaction === "clap") {
+        leaderboardData[board][index].claps += 1;
+      }
+
+      button.classList.add("active");
+      renderLeaderboard(board);
+    });
+  });
+}
+
+document.querySelectorAll(".leaderboard-tab").forEach((button) => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".leaderboard-tab").forEach((tab) => {
+      tab.classList.remove("active");
+    });
+
+    button.classList.add("active");
+    renderLeaderboard(button.dataset.leaderboard);
+  });
+});
+
+function renderFounderBadges() {
+  const badgeGrid = document.getElementById("badgeGrid");
+
+  if (!badgeGrid) {
+    return;
+  }
+
+  badgeGrid.innerHTML = "";
+
+  founderBadges.forEach((badge) => {
+    const card = document.createElement("div");
+    card.className = `founder-badge-card ${badge.earned ? "" : "locked"}`;
+
+    card.innerHTML = `
+      <div class="founder-badge-icon">${badge.icon}</div>
+      <h4>${badge.title}</h4>
+      <p>${badge.description}</p>
+      <span class="badge-status ${badge.earned ? "earned" : "locked"}">
+        ${badge.earned ? "Earned" : "Locked"}
+      </span>
+    `;
+
+    badgeGrid.appendChild(card);
+  });
+}
+
+function calculateXpAndMomentum() {
+  const earnedBadgeCount = founderBadges.filter((badge) => badge.earned).length;
+  const kpiUpdateXp = 50 * 5;
+  const milestoneXp = 100 * 3;
+  const realGoalXp = 300 * 1;
+  const badgeXp = 500 * earnedBadgeCount;
+  const totalXp = kpiUpdateXp + milestoneXp + realGoalXp + badgeXp;
+
+  const levelData = [
+    { level: 1, name: "Idea Stage", xp: 0 },
+    { level: 5, name: "Builder", xp: 1000 },
+    { level: 10, name: "Operator", xp: 2000 },
+    { level: 20, name: "Scaler", xp: 5000 },
+    { level: 50, name: "Unicorn Tier 🦄", xp: 15000 }
+  ];
+
+  let currentLevel = levelData[0];
+  let nextLevel = levelData[1];
+
+  for (let i = 0; i < levelData.length; i++) {
+    if (totalXp >= levelData[i].xp) {
+      currentLevel = levelData[i];
+      nextLevel = levelData[i + 1] || null;
+    }
+  }
+
+  const currentLevelName = document.getElementById("currentLevelName");
+  const currentXpValue = document.getElementById("currentXpValue");
+  const xpProgressFill = document.getElementById("xpProgressFill");
+  const nextLevelText = document.getElementById("nextLevelText");
+
+  if (currentLevelName && currentXpValue && xpProgressFill && nextLevelText) {
+    currentLevelName.textContent = `Level ${currentLevel.level}: ${currentLevel.name}`;
+    currentXpValue.textContent = `${totalXp.toLocaleString()} XP`;
+
+    if (nextLevel) {
+      const levelRange = nextLevel.xp - currentLevel.xp;
+      const progressWithinLevel = totalXp - currentLevel.xp;
+      const progressPercent = Math.min((progressWithinLevel / levelRange) * 100, 100);
+
+      xpProgressFill.style.width = `${progressPercent}%`;
+      nextLevelText.textContent = `${(nextLevel.xp - totalXp).toLocaleString()} XP needed to reach Level ${nextLevel.level}: ${nextLevel.name}`;
+    } else {
+      xpProgressFill.style.width = "100%";
+      nextLevelText.textContent = "Maximum level reached.";
+    }
+  }
+
+  const growthStreak = 6;
+  const onTimeStreak = 9;
+  const activityScore = earnedBadgeCount * 10;
+  const momentumScore = Math.min(growthStreak * 6 + onTimeStreak * 4 + activityScore, 100);
+  const momentumElements = [
+    {
+      fill: document.getElementById("momentumFill"),
+      status: document.getElementById("momentumStatus"),
+      description: document.getElementById("momentumDescription")
+    },
+    {
+      fill: document.getElementById("kpiMomentumFill"),
+      status: document.getElementById("kpiMomentumStatus"),
+      description: document.getElementById("kpiMomentumDescription")
+    }
+  ];
+
+  momentumElements.forEach((meter) => {
+    if (!meter.fill || !meter.status || !meter.description) {
+      return;
+    }
+
+    meter.fill.style.width = `${momentumScore}%`;
+
+    if (momentumScore < 40) {
+      meter.status.textContent = "🔴 Losing momentum";
+      meter.status.style.background = "#fff0f3";
+      meter.status.style.color = "var(--danger)";
+      meter.description.textContent = "Reporting or growth activity has slowed. Focus on timely KPI updates and verified progress.";
+    } else if (momentumScore < 70) {
+      meter.status.textContent = "🟡 Stable";
+      meter.status.style.background = "#fff7e8";
+      meter.status.style.color = "var(--amber)";
+      meter.description.textContent = "The startup is stable. More consistent growth and activity can improve momentum.";
+    } else {
+      meter.status.textContent = "🟢 Scaling";
+      meter.status.style.background = "#eaf8f0";
+      meter.status.style.color = "var(--green)";
+      meter.description.textContent = "Strong KPI reporting, positive growth streak and active milestone progress indicate scaling momentum.";
+    }
+  });
+}
+
+renderLeaderboard();
+renderFounderBadges();
+calculateXpAndMomentum();
+
 syncKpiSlide();
 renderSlideGrid();
 selectSlide(selectedSlideId);
+

@@ -27,7 +27,36 @@
     </aside>
 
     <main class="main-content">
-        topbar
+
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">QSTP Management</p>
+                <h2 id="pageTitle">Main Dashboard</h2>
+            </div>
+
+            <div class="topbar-actions">
+                <div class="notification-wrapper">
+                    <button class="notification-btn" id="managementNotificationBtn" aria-label="Open notifications">
+                        🔔
+                        <span class="notification-count" id="managementNotificationCount">4</span>
+                    </button>
+
+                    <div class="notification-panel" id="managementNotificationPanel">
+                        <div class="notification-header">
+                            <h3>Reminders & Notifications</h3>
+                            <button id="closeManagementNotifications">×</button>
+                        </div>
+
+                        <div class="notification-list" id="managementNotificationList"></div>
+                    </div>
+                </div>
+
+                <div class="portfolio-pill">
+                    <span class="status-dot"></span>
+                    300 Startups
+                </div>
+            </div>
+        </header>
 
         <section class="tab-content active" id="main-dashboard">
             <div class="quick-menu">
@@ -86,6 +115,15 @@
 
                     <div class="request-list" id="approvalList"></div>
                 </div>
+            </section>
+
+            <section class="section-card milestone-card">
+                <div class="section-heading">
+                    <h3>Milestone Timeline</h3>
+                    <p>Latest startup milestones shown in descending order.</p>
+                </div>
+
+                <div class="milestone-timeline" id="milestoneTimeline"></div>
             </section>
 
             <section class="section-card send-command-card" id="send-command-section">
