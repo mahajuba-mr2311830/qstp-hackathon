@@ -1498,3 +1498,15 @@ textarea:focus {
 .kpi-momentum-card .momentum-meter-card {
   margin-top: 0;
 }
+
+.dashboard-xp-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.main-dashboard-xp {
+  margin-bottom: 0;
+  box-shadow: none;
+  border: 0;
+  background: rgba(255, 255, 255, 0.92);
+}

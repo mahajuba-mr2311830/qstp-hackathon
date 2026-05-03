@@ -1279,27 +1279,41 @@ function calculateXpAndMomentum() {
     }
   }
 
-  const currentLevelName = document.getElementById("currentLevelName");
-  const currentXpValue = document.getElementById("currentXpValue");
-  const xpProgressFill = document.getElementById("xpProgressFill");
-  const nextLevelText = document.getElementById("nextLevelText");
+  const xpElements = [
+    {
+      levelName: document.getElementById("currentLevelName"),
+      xpValue: document.getElementById("currentXpValue"),
+      progressFill: document.getElementById("xpProgressFill"),
+      nextLevelText: document.getElementById("nextLevelText")
+    },
+    {
+      levelName: document.getElementById("dashboardCurrentLevelName"),
+      xpValue: document.getElementById("dashboardCurrentXpValue"),
+      progressFill: document.getElementById("dashboardXpProgressFill"),
+      nextLevelText: document.getElementById("dashboardNextLevelText")
+    }
+  ];
 
-  if (currentLevelName && currentXpValue && xpProgressFill && nextLevelText) {
-    currentLevelName.textContent = `Level ${currentLevel.level}: ${currentLevel.name}`;
-    currentXpValue.textContent = `${totalXp.toLocaleString()} XP`;
+  xpElements.forEach((element) => {
+    if (!element.levelName || !element.xpValue || !element.progressFill || !element.nextLevelText) {
+      return;
+    }
+
+    element.levelName.textContent = `Level ${currentLevel.level}: ${currentLevel.name}`;
+    element.xpValue.textContent = `${totalXp.toLocaleString()} XP`;
 
     if (nextLevel) {
       const levelRange = nextLevel.xp - currentLevel.xp;
       const progressWithinLevel = totalXp - currentLevel.xp;
       const progressPercent = Math.min((progressWithinLevel / levelRange) * 100, 100);
 
-      xpProgressFill.style.width = `${progressPercent}%`;
-      nextLevelText.textContent = `${(nextLevel.xp - totalXp).toLocaleString()} XP needed to reach Level ${nextLevel.level}: ${nextLevel.name}`;
+      element.progressFill.style.width = `${progressPercent}%`;
+      element.nextLevelText.textContent = `${(nextLevel.xp - totalXp).toLocaleString()} XP needed to reach Level ${nextLevel.level}: ${nextLevel.name}`;
     } else {
-      xpProgressFill.style.width = "100%";
-      nextLevelText.textContent = "Maximum level reached.";
+      element.progressFill.style.width = "100%";
+      element.nextLevelText.textContent = "Maximum level reached.";
     }
-  }
+  });
 
   const growthStreak = 6;
   const onTimeStreak = 9;
