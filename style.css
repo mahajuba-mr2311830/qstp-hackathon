@@ -274,52 +274,12 @@ body {
   margin-bottom: 18px;
 }
 
-.post-image {
-  height: 96px;
-  border: 1px dashed #c99aa8;
-  border-radius: 18px;
-  background: var(--maroon-soft);
-  color: var(--maroon);
-  display: grid;
-  place-items: center;
-  font-weight: 700;
-  font-size: 0.95rem;
-}
-
-.info-section {
-  width: 86%;
-  margin: 34px auto 70px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.info-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 24px;
-  box-shadow: 0 10px 26px rgba(67, 9, 22, 0.07);
-}
-
-.info-card h3 {
-  color: var(--maroon-dark);
-  margin-bottom: 8px;
-}
-
-.info-card p {
-  color: var(--muted);
-  line-height: 1.6;
-  font-size: 0.95rem;
-}
-
 @media (max-width: 850px) {
   .site-header {
     padding: 20px 5%;
   }
 
-  .digest-section,
-  .info-section {
+  .digest-section {
     width: 92%;
   }
 
